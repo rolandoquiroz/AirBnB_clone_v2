@@ -2,7 +2,7 @@
 # Bash script that sets up your web servers for the deployment of web_static
 sudo service nginx stop
 sudo apt-get update && sudo apt-get upgrade
-sudo apt-get -y nginx
+sudo apt-get -y install nginx
 sudo mkdir -p /data/web_static/releases/test/ /data/web_static/shared/
 echo "Holberton School rules!" | sudo tee /data/web_static/releases/test/index.html
 sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
