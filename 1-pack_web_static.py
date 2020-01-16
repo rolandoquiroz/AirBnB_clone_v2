@@ -18,8 +18,8 @@ def do_pack():
     my_file = "web_static_{}.tgz".format(current_time)
     local("tar -cvzf versions/web_static_'{}' web_static".format(my_file))
     my_path = "versions/{}".format(my_file)
-    os.path.normpath(my_path)
-    if os.path.exists(my_path):
+    if (os.path.exists(os.path.normpath(my_path))
+        and os.path.getsize(os.path.normpath(my_path))) > 0:
         return my_path
     else:
         return None
