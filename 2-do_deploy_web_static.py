@@ -9,8 +9,9 @@ from datetime import datetime
 import os
 
 
-env.hosts = ["104.196.104.147", "34.73.38.83"]
+env.hosts = ["34.73.38.83", "104.196.104.147"]
 env.key_filename = "~/.ssh/holberton"
+
 
 def do_pack():
     """
@@ -28,9 +29,7 @@ def do_pack():
 
 
 def do_deploy(archive_path):
-    """
-    do_deploy method
-    """
+    """ Do deploy """
     if not os.path.exists(archive_path):
         return False
     Upload = put(archive_path, "/tmp/")
@@ -50,11 +49,11 @@ def do_deploy(archive_path):
         return False
     Move_uncompressed = run(
         "mv /data/web_static/releases/'{0}'/web_static/* \
-        /data/web_static/releases/'{0}'/web_static".format(archive))
+        /data/web_static/releases/'{0}'".format(archive))
     if Move_uncompressed.failed:
         return False
-    Delete_old = ("rm -rf /data/web_static/releases/'{0}'/web_static".
-                  format(archive))
+    Delete_old = run("rm -rf /data/web_static/releases/'{0}'/web_static".
+                     format(archive))
     if Delete_old.failed:
         return False
     Delete_old_sym_link = run("rm -rf /data/web_static/current")
