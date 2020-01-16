@@ -6,17 +6,20 @@ of your AirBnB Clone repo, using the function do_pack.
 """
 from fabric.api import local
 from datetime import datetime
+# from pathlib import Path
 import os
 
 def do_pack():
     """
     do_method method
     """
-    current_time=datetime.utcnow().strftime("%Y%m%d%H%M%S")
-    path_and_file_tgz='versions/web_static{}.tgz'.format(current_time)
     local("mkdir -p versions")
-    local("tar -cvzf path_and_file_tgz web_static")
-    if (os.path.exists(path_and_file_tgz) and os.path.getsize(path_and_file_tgz)) > 0:
-        return
+    current_time = datetime.utcnow().strftime("%Y%m%d%H%M%S")
+    my_file = "web_static_{}.tgz".format(current_time)
+    local("tar -cvzf versions/web_static_'{}' web_static".format(my_file))
+    my_path = "versions/{}".format(my_file)
+    os.path.normpath(my_path)
+    if os.path.exists(my_path):
+        return my_path
     else:
         return None
