@@ -71,5 +71,7 @@ def deploy():
     Deploy method
     """
     pack = do_pack()
-    ans = do_deploy(pack)
-    return ans
+    if pack:
+        do_deploy(pack)
+    else:
+    return False
