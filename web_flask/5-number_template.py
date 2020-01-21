@@ -55,7 +55,7 @@ def n_template(n):
     Display a HTML page only if n is an integer
     """
     if isinstance(n, int):
-        return render_template('5-number.html'. number=n)
+        return render_template('5-number.html', n=n)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
