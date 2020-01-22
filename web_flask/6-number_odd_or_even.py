@@ -59,7 +59,7 @@ def n_template(n):
 
 
 @app.route('/number_odd_or_even/<int:n>', strict_slashes=False)
-def n_template(n):
+def n_template_o_e(n):
     """
     Display a HTML page only if n is an integer
     """
