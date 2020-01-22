@@ -5,7 +5,7 @@ from models.base_model import Base
 from models.city import City
 from sqlalchemy import Column, String, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
-
+from os import getenv
 
 class State(BaseModel, Base):
     """This is the class for State
@@ -25,3 +25,13 @@ class State(BaseModel, Base):
             if city.state_id == self.id:
                 cities_list.append(city)
         return cities_list
+
+    if (getenv('HBNB_TYPE_STORAGE') != "db"):
+        @property
+        def cities(self):
+            """returns list of city
+            instances with
+            matching state_id
+            """
+            cityObjs = models.storage.all('City').values()
+            return [c for c in cityObjs if c.state_id == self.id]
