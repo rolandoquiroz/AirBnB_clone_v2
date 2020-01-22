@@ -15,24 +15,15 @@ class State(BaseModel, Base):
     """
     __tablename__ = 'states'
     name = Column(String(128), nullable=False)
-    cityes = relationship("City", backref="stat", cascade="all,delete")
-
-    @property
-    def city(self):
-        """returns the list of City instances with state_id"""
-        all_cities = storage.all(City)
-        cities_list = []
-        for city in all_cities.values():
-            if city.state_id == self.id:
-                cities_list.append(city)
-        return cities_list
-
-    if (getenv('HBNB_TYPE_STORAGE') != "db"):
+    if getenv('HBNB_TYPE_STORAGE') == 'db':
+        cities = relationship("City", backref="stat", cascade="all,delete")
+    else:
         @property
         def cities(self):
-            """returns list of city
-            instances with
-            matching state_id
-            """
-            cityObjs = models.storage.all('City').values()
-            return [c for c in cityObjs if c.state_id == self.id]
+            """returns the list of City instances with state_id"""
+            all_cities = models.storage.all(City)
+            cities_list = []
+            for city in all_cities.values():
+                if city.state_id == self.id:
+                    cities_list.append(city)
+            return cities_list
