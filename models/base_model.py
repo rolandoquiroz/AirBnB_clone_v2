@@ -69,9 +69,7 @@ class BaseModel:
         my_dict = {}
         my_dict = self.__dict__.copy()
         my_dict.update(__class__=self.__class__.__name__)
-        if 'created_at' in my_dict:
             my_dict['created_at'] = my_dict['created_at'].isoformat()
-        if 'updated_at' in my_dict:
             my_dict['updated_at'] = my_dict['updated_at'].isoformat()
         if '_sa_instance_state' in my_dict:
             del my_dict["_sa_instance_state"]
