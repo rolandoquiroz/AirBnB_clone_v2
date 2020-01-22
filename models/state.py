@@ -8,6 +8,7 @@ from sqlalchemy import Column, String, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from os import getenv
 
+
 class State(BaseModel, Base):
     """This is the class for State
     Attributes:
@@ -21,9 +22,5 @@ class State(BaseModel, Base):
         @property
         def cities(self):
             """returns the list of City instances with state_id"""
-            all_cities = models.storage.all(City)
-            cities_list = []
-            for city in all_cities.values():
-                if city.state_id == self.id:
-                    cities_list.append(city)
-            return cities_list
+            all_cities = models.storage.all(City).values()
+            return [c for c in all_cities if c.state_id == self.id]

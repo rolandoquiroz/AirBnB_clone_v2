@@ -72,9 +72,13 @@ class BaseModel:
             my_dict["created_at"] = self.created_at.isoformat()
         if "updated_at" in my_dict:
             my_dict["updated_at"] = self.updated_at.isoformat()
-        if "_sa_instance_state" in my_dict.keys():
+        """ if "_sa_instance_state" in my_dict.keys():
             del my_dict["_sa_instance_state"]
-        return my_dict
+        return my_dict"""
+        try:
+            del my_dict["_sa_instance_state"]
+        except KeyError:
+            pass
         return my_dict
 
     def delete(self):
