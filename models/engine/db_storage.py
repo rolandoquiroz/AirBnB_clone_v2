@@ -36,12 +36,12 @@ class DBStorage():
 
         c_dict = {}
         if cls is None:
-            all_cls = ['State', 'City', 'User', 'Place', 'Review', 'Amenity']
+            all_cls = ['State', 'City', 'User', 'Place', 'Review']
             for classes in all_cls:
                 for obj in self.__session.query(eval(classes)).all():
                     c_dict[type(obj).__name__+"."+obj.id] = obj
         else:
-            for obj in self.__session.query(cls).all():
+            for obj in self.__session.query(eval(cls)).all():
                 c_dict[type(obj).__name__+"."+obj.id] = obj
         return c_dict
 
