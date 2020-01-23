@@ -22,7 +22,7 @@ def states_list():
     List states in a jinja template
     """
     states_dict = storage.all(State)
-    states = [[k, v] for k, v in states_dict.items()]
+    states = [v for v in states_dict.values()]
     return render_template('7-states_list.html', states=states)
 
 if __name__ == '__main__':
