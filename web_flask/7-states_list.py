@@ -22,11 +22,8 @@ def states_list():
     List states in a jinja template
     """
     states_dict = storage.all("State")
-    states_list = []
-    for key, value in dict.iteritems():
-        temp = [key,value]
-        states_list.append(temp)
-    return render_template('7-states_list.html', states=states_list))
+    states = states_dict.items()
+    return render_template('7-states_list.html', states)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
